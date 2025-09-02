@@ -1,10 +1,17 @@
-FROM alpine:3.18
+# Use the latest Alpine image for small size
+FROM alpine:latest
 
+# Set working directory
 WORKDIR /app
+
+# Copy all project files into container
 COPY . .
 
+# Make pocketbase binary executable
 RUN chmod +x ./pocketbase
 
-EXPOSE 8080
+# Expose default PocketBase port
+EXPOSE 10000
 
-CMD ["./pocketbase", "serve", "--http=0.0.0.0:8080"]
+# Run PocketBase server
+CMD ["./pocketbase", "serve", "--http=0.0.0.0:10000"]
